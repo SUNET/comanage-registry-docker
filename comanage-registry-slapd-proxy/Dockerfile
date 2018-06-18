@@ -1,4 +1,4 @@
-# slapd Dockerfile template for use with COmanage Registry
+# slapd proxy Dockerfile for use with COmanage Registry
 #
 # Portions licensed to the University Corporation for Advanced Internet
 # Development, Inc. ("UCAID") under one or more contributor license agreements.
