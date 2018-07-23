@@ -1,3 +1,58 @@
 ---
-script:
-  - ./build-images.sh
+environment_variables:
+  COMANAGE_REGISTRY_VERSION: "3.1.1"
+  MAILMAN_VERSION: "0.1.7"
+
+extra_jobs:
+  - name: comanage-registry-postgres
+    builders:
+      - docker
+    docker_name: comanage-registry-postgres
+    docker_context_dir: comanage-registry-postgres
+
+  - name: comanage-registry-slapd
+    builders:
+      - docker
+    docker_name: comanage-registry-slapd
+    docker_context_dir: comanage-registry-slapd
+
+  - name: comanage-registry-shibboleth-sp
+    builders:
+      - docker
+      - script
+    docker_name: comanage-registry
+    docker_tags:
+      - "${COMANAGE_REGISTRY_VERSION}-shibboleth-sp"
+    docker_context_dir: comanage-registry-shibboleth-sp
+    docker_no_cache: false
+    script:
+      - "cd comanage-registry-shibboleth-sp"
+      - "sed -e s/%%COMANAGE_REGISTRY_VERSION%%/${COMANAGE_REGISTRY_VERSION}/g Dockerfile.template > Dockerfile"
+
+  - name: comanage-registry-mailman-core
+    builders:
+      - docker
+    docker_name: mailman-core
+    docker_tags:
+      - "${MAILMAN_VERSION}"
+    docker_context_dir: comanage-registry-mailman/core
+
+  - name: comanage-registry-mailman-web
+    builders:
+      - docker
+    docker_name: mailman-web
+    docker_tags:
+      - "${MAILMAN_VERSION}"
+    docker_context_dir: comanage-registry-mailman/web
+
+  - name: comanage-registry-mailman-nginx
+    builders:
+      - docker
+    docker_name: mailman-core-nginx
+    docker_context_dir: comanage-registry-mailman/nginx
+
+  - name: comanage-registry-mailman-postfix
+    builders:
+      - docker
+    docker_name: mailman-postfix
+    docker_context_dir: comanage-registry-mailman/postfix
