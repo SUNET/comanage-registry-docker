@@ -7,13 +7,14 @@ pushd comanage-registry-postgres
 docker build --no-cache=true -t docker.sunet.se/comanage-registry-postgres .
 popd
 
+docker pull sphericalcowgroup/comanage-registry-slapd-base
 pushd comanage-registry-slapd
 docker build --no-cache=true -t docker.sunet.se/comanage-registry-slapd .
 popd
 
 pushd comanage-registry-shibboleth-sp
 sed -e s/%%COMANAGE_REGISTRY_VERSION%%/${COMANAGE_REGISTRY_VERSION}/g Dockerfile.template  > Dockerfile
-docker build --no-cache=true -t docker.sunet.se/comanage-registry:${COMANAGE_REGISTRY_VERSION}-shibboleth-sp .
+docker build -t docker.sunet.se/comanage-registry:${COMANAGE_REGISTRY_VERSION}-shibboleth-sp .
 popd
 
 pushd comanage-registry-mailman/core
