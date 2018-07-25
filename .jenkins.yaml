@@ -14,6 +14,8 @@ extra_jobs:
     builders:
       - docker
     docker_name: comanage-registry-slapd
+    docker_tags:
+      - "latest"
     docker_context_dir: comanage-registry-slapd
 
   - name: comanage-registry-shibboleth-sp
