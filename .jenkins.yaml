@@ -1,19 +1,23 @@
 ---
 environment_variables:
-  COMANAGE_REGISTRY_VERSION: "3.2.1"
   MAILMAN_VERSION: "0.1.7"
+  COMANAGE_REGISTRY_VERSION: "3.2.1"
   COMANAGE_REGISTRY_BASE_IMAGE_VERSION: "1"
-  COMANAGE_REGISTRY_SHIBBOLETH_SP_VERSION: "3.0.3"
+  COMANAGE_REGISTRY_SHIBBOLETH_SP_VERSION: "3.0.4"
   COMANAGE_REGISTRY_SHIBBOLETH_SP_BASE_IMAGE_VERSION: "1"
 
 extra_jobs:
   - name: comanage-registry-base
     builders:
       - docker
+      - script
     docker_name: comanage-registry-base
     docker_tags:
       - "${COMANAGE_REGISTRY_VERSION}-${COMANAGE_REGISTRY_BASE_IMAGE_VERSION}"
     docker_context_dir: comanage-registry-base
+    script:
+      - "cd comanage-registry-base"
+      - "sed -e s/%%COMANAGE_REGISTRY_VERSION%%/${COMANAGE_REGISTRY_VERSION}/g Dockerfile.template > Dockerfile"
 
    - name: comanage-registry-shibboleth-sp-base
     builders:
