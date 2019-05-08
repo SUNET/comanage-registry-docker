@@ -17,7 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM python:2.7-stretch
+FROM python:3.6-stretch
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -29,35 +29,31 @@ RUN apt-get update \
         postgresql-client \
         sassc \
     && pip install --upgrade pip \
-    && pip install django-allauth==0.35.0 \  
-        django-appconf==1.0.2 \    
-        django-compressor==2.2 \     
-        django-extensions==2.0.7 \    
-        django-gravatar2==1.4.2 \   
-        django-haystack==2.8.1 \   
-        django-mailman3==1.1.0 \   
-        django-paintstore==0.2 \     
-        django-picklefield==1.0.0 \    
-        django-q==0.9.4 \    
-        djangorestframework==3.8.2 \
-    && pip install django==1.11 \
-    && pip install mailmanclient==3.1.1 \
-        postorius==1.1.2 \
-        hyperkitty==1.1.4 \
-        django-mailman3==1.1.0 \
+    && pip install django==2.1.5 \
+    && pip install \
+        mailmanclient==3.2.1 \
+        postorius==1.2.3 \
+        hyperkitty==1.2.1 \
+        django-mailman3==1.2.0 \
         whoosh \
         uwsgi \
         psycopg2 \
         dj-database-url \
         mysqlclient \
         typing \
+        xapian-haystack \
     && adduser --system --no-create-home --group mailman
+
+COPY django-mail-header /tmp/django-mail-header
+RUN pip install /tmp/django-mail-header \
+    && rm -rf /tmp/django-mail-header
 
 # Add needed files for uwsgi server + settings for django
 COPY mailman-web /opt/mailman-web
 
-# Overlay customized template for Postorius login
-COPY login.html /usr/local/lib/python2.7/site-packages/django_mailman3/templates/account/
+# Overlay modified templates
+COPY postorius.base.html /usr/local/lib/python3.6/site-packages/postorius/templates/postorius/base.html
+COPY hyperkitty.base.html /usr/local/lib/python3.6/site-packages/hyperkitty/templates/hyperkitty/base.html
 
 RUN chown -R mailman:mailman /opt/mailman-web/ \
     && chmod u+x /opt/mailman-web/manage.py
