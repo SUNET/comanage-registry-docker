@@ -32,7 +32,7 @@ extra_jobs:
       - docker
     docker_name: comanage-registry-slapd-base
     docker_tags:
-      - "latest"
+      - "${COMANAGE_REGISTRY_SLAPD_BASE_IMAGE_VERSION}"
     docker_context_dir: comanage-registry-slapd-base
 
   - name: comanage-registry
