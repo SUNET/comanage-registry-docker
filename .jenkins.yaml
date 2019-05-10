@@ -41,12 +41,11 @@ extra_jobs:
       - script
     docker_name: comanage-registry
     docker_tags:
-      - "${COMANAGE_REGISTRY_VERSION}-shibboleth-sp-${COMANAGE_REGISTRY_SHIBBOLETH_SP_IMAGE_VERSION}"
+      - "${COMANAGE_REGISTRY_VERSION}-shibboleth-sp-${COMANAGE_REGISTRY_SHIBBOLETH_SP_VERSION}"
     docker_context_dir: comanage-registry-shibboleth-sp
     docker_no_cache: false
     script:
-      - "cd comanage-registry-shibboleth-sp"
-      - "sed -e s/%%COMANAGE_REGISTRY_VERSION%%/${COMANAGE_REGISTRY_VERSION}/g Dockerfile.template > Dockerfile"
+      - "sed -e s/%%COMANAGE_REGISTRY_VERSION%%/${COMANAGE_REGISTRY_VERSION}/g comanage-registry-shibboleth-sp/Dockerfile.template > comanage-registry-shibboleth-sp/Dockerfile"
 
   - name: comanage-registry-postgres
     builders:
