@@ -49,7 +49,6 @@ RUN apt-get update && apt-get install -y \
          libpq-dev \
       && apt-get clean
 
-ARG COMANAGE_REGISTRY_VERSION
 ENV COMANAGE_REGISTRY_VERSION ${COMANAGE_REGISTRY_VERSION:-develop}
 LABEL comanage_registry_version=${COMANAGE_REGISTRY_VERSION}
 
