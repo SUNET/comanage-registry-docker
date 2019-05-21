@@ -17,7 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ARG COMANAGE_REGISTRY_SLAPD_BASE_IMAGE_VERSION=2
-FROM comanage-registry-slapd-base:${COMANAGE_REGISTRY_SLAPD_BASE_IMAGE_VERSION}
+FROM docker.sunet.se/comanage-registry-slapd-base:${COMANAGE_REGISTRY_SLAPD_BASE_IMAGE_VERSION}
 
 ENV COMANAGE_REGISTRY_SLAPD_BASE_IMAGE_VERSION ${COMANAGE_REGISTRY_SLAPD_BASE_IMAGE_VERSION}
 LABEL comanage_registry_slapd_base_image_version=${COMANAGE_REGISTRY_SLAPD_BASE_IMAGE_VERSION}
