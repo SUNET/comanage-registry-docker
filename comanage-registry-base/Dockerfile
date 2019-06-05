@@ -18,6 +18,8 @@
 # limitations under the License.
 FROM php:7.3.4-apache-stretch
 
+ARG COMANAGE_REGISTRY_VERSION=3.2.1
+
 # Official PHP image with Apache HTTPD includes
 # --with-openssl
 # --with-mbstring
