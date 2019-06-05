@@ -63,7 +63,7 @@ extra_jobs:
       - docker
     docker_name: comanage-registry-slapd
     docker_tags:
-      - "latest"
+      - "1.0.0"
     docker_context_dir: comanage-registry-slapd
 
   - name: comanage-registry-mailman-core
