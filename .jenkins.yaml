@@ -21,6 +21,7 @@ extra_jobs:
       - "latest"
     docker_context_dir: comanage-satosa-experimental
     script:
+      - "cd comanage-satosa-experimental"
       - "git checkout co_virtual_idp"
 
   - name: comanage-registry-base
