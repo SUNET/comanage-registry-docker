@@ -11,21 +11,6 @@ triggers:
   cron: "@daily"
 
 extra_jobs:
-### FIXME: This Satosa-build below is EXPERIMENTAL, awaiting a proper tagged release of Satosa with this func included before building properly!!!
-  - name: comanage-satosa-experimental
-    builders:
-      - docker
-      - script
-    docker_name: comanage-satosa-experimental
-    docker_tags:
-      - "latest"
-    docker_context_dir: comanage-satosa-experimental
-    script:
-      - "cd comanage-satosa-experimental"
-      - "git remote update"
-      - "git pull"
-      - "git checkout co_virtual_idp"
-
   - name: comanage-registry-base
     builders:
       - docker
