@@ -23,7 +23,7 @@ extra_jobs:
     script:
       - "cd comanage-satosa-experimental"
       - "git remote update"
-      - "git fetch"
+      - "git pull"
       - "git checkout co_virtual_idp"
 
   - name: comanage-registry-base
