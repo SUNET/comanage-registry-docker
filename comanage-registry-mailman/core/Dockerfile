@@ -29,7 +29,7 @@ RUN apt-get update \
         postgresql-client \
         python3-dev \
     && pip install psycopg2 \
-                   mailman==3.2 \
+                   mailman==3.2.2 \
                    mailman-hyperkitty==1.1.0 \
                    pymysql \
     && adduser --system mailman
@@ -57,6 +57,7 @@ ENV MAILMAN_CONFIG_FILE /etc/mailman.cfg
 # are accepted upstream.
 COPY addresses.py /usr/local/lib/python3.6/site-packages/mailman/rest/addresses.py
 COPY users.py /usr/local/lib/python3.6/site-packages/mailman/rest/users.py
+RUN chmod 644 /usr/local/lib/python3.6/site-packages/mailman/rest/addresses.py /usr/local/lib/python3.6/site-packages/mailman/rest/users.py
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["master", "--force"]

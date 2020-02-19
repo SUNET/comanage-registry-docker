@@ -25,7 +25,7 @@ FROM comanage-registry-shibboleth-sp-base:${COMANAGE_REGISTRY_SHIBBOLETH_SP_VERS
 
 FROM comanage-registry-base:${COMANAGE_REGISTRY_VERSION}-${COMANAGE_REGISTRY_BASE_IMAGE_VERSION} AS comanage-registry-base
 
-FROM httpd:2.4
+FROM httpd:2.4.38
 
 RUN apt-get update && apt-get install -y \
          curl \
@@ -51,9 +51,6 @@ RUN /usr/sbin/useradd --system _shibd \
       && cd /opt/shibboleth-sp/etc \
       && rm -rf shibboleth \
       && ln -s /etc/shibboleth shibboleth
-
-COPY --chown=_shibd:_shibd shibd.logger /etc/shibboleth/shibd.logger
-COPY --chown=_shibd:_shibd native.logger /etc/shibboleth/native.logger
 
 COPY --from=comanage-registry-base /usr/local/lib/comanage_shibboleth_sp_utils.sh /usr/local/lib/comanage_shibboleth_sp_utils.sh
 

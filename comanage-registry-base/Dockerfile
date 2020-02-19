@@ -16,7 +16,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-FROM php:7.3.4-apache-stretch
+FROM php:7.3.13-apache-buster
 
 ARG COMANAGE_REGISTRY_VERSION=3.2.1
 
@@ -28,7 +28,6 @@ ARG COMANAGE_REGISTRY_VERSION=3.2.1
 RUN apt-get update && apt-get install -y \
          libldap-2.4-2 \
          libldap2-dev \
-         libmariadbclient18 \
          libmariadbclient-dev \
          libpq-dev \
          libxml2 \
@@ -53,7 +52,8 @@ ARG COMANAGE_REGISTRY_VERSION
 ENV COMANAGE_REGISTRY_VERSION ${COMANAGE_REGISTRY_VERSION:-develop}
 LABEL comanage_registry_version=${COMANAGE_REGISTRY_VERSION}
 
-ENV COMANAGE_REGISTRY_SRC_URL=https://github.com/Internet2/comanage-registry/archive/${COMANAGE_REGISTRY_VERSION}.tar.gz
+ARG COMANAGE_REGISTRY_SRC_URL
+ENV COMANAGE_REGISTRY_SRC_URL=${COMANAGE_REGISTRY_SRC_URL:-https://github.com/Internet2/comanage-registry/archive/${COMANAGE_REGISTRY_VERSION}.tar.gz}
 
 ARG COMANAGE_REGISTRY_DIR
 ENV COMANAGE_REGISTRY_DIR ${COMANAGE_REGISTRY_DIR:-/srv/comanage-registry}
