@@ -3,7 +3,7 @@ environment_variables:
   MAILMAN_VERSION: "0.1.7"
   COMANAGE_REGISTRY_VERSION: "3.2.3"
   COMANAGE_REGISTRY_BASE_IMAGE_VERSION: "1"
-  COMANAGE_REGISTRY_SHIBBOLETH_SP_VERSION: "3.0.3"
+  COMANAGE_REGISTRY_SHIBBOLETH_SP_VERSION: "3.0.4"
   COMANAGE_REGISTRY_SHIBBOLETH_SP_BASE_IMAGE_VERSION: "1"
   COMANAGE_REGISTRY_SLAPD_BASE_IMAGE_VERSION: "2"
 
@@ -27,7 +27,7 @@ extra_jobs:
       - docker
     docker_name: comanage-registry-shibboleth-sp-base
     docker_tags:
-      - "3.0.3-1"
+      - "3.0.4-1"
     docker_context_dir: comanage-registry-shibboleth-sp-base 
 
   - name: comanage-registry-slapd-base
@@ -44,7 +44,7 @@ extra_jobs:
       - script
     docker_name: comanage-registry
     docker_tags:
-      - "3.2.3-shibboleth-sp-3.0.3"
+      - "3.2.3-shibboleth-sp-3.0.4"
     docker_context_dir: comanage-registry-shibboleth-sp
     docker_no_cache: false
     script:
