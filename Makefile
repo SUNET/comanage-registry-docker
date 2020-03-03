@@ -10,7 +10,7 @@ release:
 	@echo "\n***\nBelow is shown what is substituted into .jenkins.yaml pending git commit & push for it to get snapped by the CI \n***\n"	
 	@diff --suppress-common-lines -y .jenkins.yaml .jenkins.template
 push:
-	git commit -m"New version coming up!\n" .jenkins.yaml
+	git commit -m"New version coming up!\n" .jenkins.yaml .jenkins.template
 	git push
 
 all: release push
