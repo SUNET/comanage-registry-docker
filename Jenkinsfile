@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment { 
         maintainer = "t"
+        maintainer_credential_ref = 'dockerhub-tier'
         imagename = 'g'
         tag = 'l'
         version='3.2.5'
@@ -28,7 +29,7 @@ pipeline {
         stage('Build and Push') {
             steps {
                 script {
-                   docker.withRegistry('https://registry.hub.docker.com/',   "dockerhub-$maintainer") {
+                   docker.withRegistry('https://registry.hub.docker.com/',   "$maintainer_credential_ref") {
                       def image_to_build
                       def image_dir
                       def build_arg
